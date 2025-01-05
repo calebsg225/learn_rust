@@ -45,11 +45,13 @@ fn main() {
             }
         };
         // check if guess is between guess min and max
-        // not a very good implamentation...
-        if let None = Guess::new(guess) {
-            println!("{} is not between {} and {}.", guess, GUESS_MIN_RANGE, GUESS_MAX_RANGE);
-            continue;
-        }
+        match Guess::new(guess) {
+            Some(_) => {},
+            _ => {
+                println!("{} is not between {} and {}.", guess, GUESS_MIN_RANGE, GUESS_MAX_RANGE);
+                continue;
+            }
+        };
         // check guess against target
         match guess.cmp(&target) {          // find out why there is an & here
             Ordering::Greater => println!("{} is too high.", guess),
