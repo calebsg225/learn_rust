@@ -25,11 +25,20 @@ impl<T> Deref for MyBox<T> {
 use crate::List::{Cons, Nil};
 
 fn main() {
+    // Box<T> can be used to store data on the heap instead of the stack.
+    // 'b' is a Box<i64>, This Box points to an i64 stored on the heap.
+    // When 'b' goes out of scope, both 'b' on the stack and the i64 stored on the heap will be deallocated.
     let b: Box<i64> = Box::new(5);
     println!("b = {}", b);
 
-    let list = Box::new(Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Cons(4, Box::new(Cons(5, Box::new(Nil)))))))))));
-    
+    let list = Box::new(Cons(
+        1,
+        Box::new(Cons(
+            2,
+            Box::new(Cons(3, Box::new(Cons(4, Box::new(Cons(5, Box::new(Nil))))))),
+        )),
+    ));
+
     let x = 5;
     // y holds a reference to x
     let y = &x;
