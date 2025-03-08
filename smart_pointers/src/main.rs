@@ -1,6 +1,8 @@
 #![allow(unused)]
 use std::ops::Deref;
 
+mod drop_trait;
+
 enum List {
     Cons(i32, Box<List>),
     Nil,
@@ -29,6 +31,7 @@ fn hello(name: &str) {
 use crate::List::{Cons, Nil};
 
 fn main() {
+    drop_trait::main();
     hello("foo");
     hello(&String::from("bar"));
     // deref coersion
